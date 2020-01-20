@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- *  Copyright (c) 2018, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2020, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +62,7 @@ public class Rules implements Iterable<Rule> {
      */
     public Rules(Object... rules ) {
         for (Object rule : rules) {
-            this.register(RuleProxy.asRule(rule));
+            this.register(rule);
         }
     }
 

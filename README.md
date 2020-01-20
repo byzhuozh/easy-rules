@@ -9,8 +9,8 @@
 
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
 [![Coverage](https://coveralls.io/repos/j-easy/easy-rules/badge.svg?style=flat&branch=master&service=github)](https://coveralls.io/github/j-easy/easy-rules?branch=master)
-[![Build Status](https://travis-ci.org/j-easy/easy-rules.svg?branch=master)](https://travis-ci.org/j-easy/easy-rules)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jeasy/easy-rules-core/badge.svg?style=flat)](http://search.maven.org/#artifactdetails|org.jeasy|easy-rules-core|3.2.0|)
+[![Build Status](https://github.com/j-easy/easy-rules/workflows/Java%20CI/badge.svg)](https://github.com/j-easy/easy-rules/actions)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jeasy/easy-rules-core/badge.svg?style=flat)](http://search.maven.org/#artifactdetails|org.jeasy|easy-rules-core|3.4.0|)
 [![Javadoc](https://www.javadoc.io/badge/org.jeasy/easy-rules-core.svg)](http://www.javadoc.io/doc/org.jeasy/easy-rules-core)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/j-easy/easy-rules)
 
@@ -20,9 +20,9 @@
 
 ## Latest news
 
+* 08/12/2019: Version 3.4.0 is out with a few enhancements and bug fixes. Checkout the release notes [here](https://github.com/j-easy/easy-rules/releases).
+* 25/04/2019: Version 3.3.0 is out with JSON and SpEL support! Checkout what's new [here](https://github.com/j-easy/easy-rules/releases).
 * 09/04/2018: Version 3.2.0 is out with new features and bug fixes. Checkout what's new [here](https://github.com/j-easy/easy-rules/releases).
-* 17/12/2017: Version 3.1.0 is out with a [new inference engine](https://github.com/j-easy/easy-rules/wiki/defining-rules-engine) and finally [Expression Language support](https://github.com/j-easy/easy-rules/wiki/expression-language-support)! See all new features and improvements in the [change log](https://github.com/j-easy/easy-rules/releases).
-* 01/06/2017: Version 3.0.0 is finally out! See all the new goodies in details [here](https://github.com/j-easy/easy-rules/releases).
 
 ## What is Easy Rules?
 
@@ -38,7 +38,7 @@ This is exactly what Easy Rules does, it provides the `Rule` abstraction to crea
  * POJO based development with annotation programming model
  * Useful abstractions to define business rules and apply them easily with Java
  * The ability to create composite rules from primitive ones
- * The ability to define rules using the Expression Language
+ * The ability to define rules using an Expression Language (Like MVEL and SpEL)
 
 ## Example
 
@@ -96,7 +96,8 @@ actions:
 ```
 
 ```java
-Rule weatherRule = MVELRuleFactory.createRuleFrom(new File("weather-rule.yml"));
+MVELRuleFactory ruleFactory = new MVELRuleFactory(new YamlRuleDefinitionReader());
+Rule weatherRule = ruleFactory.createRule(new FileReader("weather-rule.yml"));
 ```
 
 ### 2. Then, fire it!
@@ -143,17 +144,22 @@ For any further question, you can use the [Gitter](https://gitter.im/j-easy/easy
 * [gs-spadmanabhan](https://github.com/gs-spadmanabhan)
 * [JurMarky](https://github.com/JurMarky)
 * [jordanjennings](https://github.com/jordanjennings)
+* [kayeight](https://github.com/kayeight)
 * [khandelwalankit](https://github.com/khandelwalankit)
+* [lranasingha](https://github.com/lranasingha)
 * [mrcritical](https://github.com/mrcritical)
 * [paulbrejla](https://github.com/paulbrejla)
 * [richdouglasevans](https://github.com/richdouglasevans)
+* [ruanjiehui](https://github.com/ruanjiehui)
 * [spearway](https://github.com/spearway)
 * [toudidel](https://github.com/toudidel)
 * [vinoct6](https://github.com/vinoct6)
 * [wg1j](https://github.com/wg1j)
 * [will-gilbert](https://github.com/will-gilbert)
+* [WayneCui](https://github.com/WayneCui)
 * [sanmibuh](https://github.com/sanmibuh)
-* [shivmitra](https://github.com/sanmibuh)
+* [shivmitra](https://github.com/shivmitra)
+* [zhhaojie](https://github.com/zhhaojie)
 
 Thank you all for your contributions!
 
@@ -165,10 +171,9 @@ Thank you all for your contributions!
 
 ## Credits
 
-|YourKit|Travis CI|
-|:-:|:-:|
-|![YourKit Java Profiler](https://www.yourkit.com/images/yklogo.png)|![Travis CI](https://travis-ci.com/images/logos/TravisCI-Full-Color.png)|
-|Many thanks to [YourKit, LLC](https://www.yourkit.com/) for providing a free license of [YourKit Java Profiler](https://www.yourkit.com/java/profiler/index.jsp) to kindly support the development of Easy Rules.|Many thanks to [Travis CI](https://travis-ci.org) for providing a free continuous integration service for open source projects.|
+![YourKit Java Profiler](https://www.yourkit.com/images/yklogo.png)
+
+Many thanks to [YourKit, LLC](https://www.yourkit.com/) for providing a free license of [YourKit Java Profiler](https://www.yourkit.com/java/profiler/index.jsp) to support the development of Easy Rules.
 
 ## License
 Easy Rules is released under the terms of the MIT license:
@@ -176,7 +181,7 @@ Easy Rules is released under the terms of the MIT license:
 ```
 The MIT License (MIT)
 
-Copyright (c) 2018 Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+Copyright (c) 2020 Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
