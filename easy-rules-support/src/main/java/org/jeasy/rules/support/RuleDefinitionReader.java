@@ -29,6 +29,8 @@ import java.util.List;
 /**
  * Strategy interface for {@link RuleDefinition} readers.
  *
+ * 规则定义读取
+ *
  * @see JsonRuleDefinitionReader
  * @see YamlRuleDefinitionReader
  *

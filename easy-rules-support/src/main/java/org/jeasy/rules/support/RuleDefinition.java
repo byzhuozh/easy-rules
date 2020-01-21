@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 规则定义
+ *
  * Rule definition as defined in a rule descriptor.
  * This class encapsulates the static definition of a {@link Rule}.
  *
@@ -39,12 +41,19 @@ import java.util.List;
  */
 public class RuleDefinition {
 
+    //名称
     private String name = Rule.DEFAULT_NAME;
+    //描述
     private String description = Rule.DEFAULT_DESCRIPTION;
+    //优先级
     private int priority = Rule.DEFAULT_PRIORITY;
+    //条件
     private String condition;
+    //执行列表
     private List<String> actions = new ArrayList<>();
+    //复合规则列表
     private List<RuleDefinition> composingRules = new ArrayList<>();
+    //复合类型
     private String compositeRuleType;
 
     public String getName() {
@@ -103,6 +112,10 @@ public class RuleDefinition {
         return composingRules;
     }
 
+    /**
+     * 判断是否是复合规则
+     * @return
+     */
     public boolean isCompositeRule() {
         return !composingRules.isEmpty();
     }

@@ -31,6 +31,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
+ * yaml 文件生成规则定义
+ *
  * Rule definition reader based on <a href="https://github.com/FasterXML/jackson-dataformats-text/tree/master/yaml">Jackson Yaml</a>.
  *
  * This reader expects a collection of rule definitions as input even for a single rule. For example:

@@ -81,6 +81,8 @@ public class ConditionalRuleGroup extends CompositeRule {
     }
 
     /**
+     * 条件：最高优先级的规则要先通过校验
+     *
      * A path rule will trigger all it's rules if the path rule's condition is true.
      * @param facts The facts.
      * @return true if the path rules condition is true.
@@ -88,9 +90,12 @@ public class ConditionalRuleGroup extends CompositeRule {
     @Override
     public boolean evaluate(Facts facts) {
         successfulEvaluations = new HashSet<>();
+        //获取优先级最高的规则
         conditionalRule = getRuleWithHighestPriority();
+        //只要优先级最高的规则通过校验，则再筛选符合条件的规则(不含最高优先级的规则)
         if (conditionalRule.evaluate(facts)) {
             for (Rule rule : rules) {
+                //判断其余规则是否符合条件
                 if (rule != conditionalRule && rule.evaluate(facts)) {
                     successfulEvaluations.add(rule);
                 }
@@ -110,15 +115,23 @@ public class ConditionalRuleGroup extends CompositeRule {
      */
     @Override
     public void execute(Facts facts) throws Exception {
+        //执行优先级最高的规则
         conditionalRule.execute(facts);
+        //对其他规则先做倒排，再执行
         for (Rule rule : sort(successfulEvaluations)) {
             rule.execute(facts);
         }
     }
 
+    /**
+     * 获取优先级最高的规则
+     * @return
+     */
     private Rule getRuleWithHighestPriority() {
+        //排序(倒排)
         List<Rule> copy = sort(rules);
         // make sure that we only have one rule with the highest priority
+        //得到优先级最高的规则
         Rule highest = copy.get(0);
         if (copy.size() > 1 && copy.get(1).getPriority() == highest.getPriority()) {
            throw new IllegalArgumentException("Only one rule can have highest priority");

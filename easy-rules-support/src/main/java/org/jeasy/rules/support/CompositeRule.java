@@ -34,6 +34,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
+ * 复合规则
+ *
  * Base class representing a composite rule composed of a set of rules.
  *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
@@ -41,10 +43,16 @@ import java.util.TreeSet;
 public abstract class CompositeRule extends BasicRule {
 
     /**
+     * 复合规则列表(代理规则列表)
      * The set of composing rules.
      */
     protected Set<Rule> rules;
 
+    /**
+     * 代理规则
+     * key：rule,  value: proxyRule
+     * key：规则，  value: 代理规则
+     */
     private Map<Object, Rule> proxyRules;
 
     /**
@@ -93,16 +101,19 @@ public abstract class CompositeRule extends BasicRule {
     public abstract void execute(Facts facts) throws Exception;
 
     /**
+     * 添加规则
      * Add a rule to the composite rule.
      * @param rule the rule to add
      */
     public void addRule(final Object rule) {
+        //生成规则代理类
         Rule proxy = RuleProxy.asRule(rule);
         rules.add(proxy);
         proxyRules.put(rule, proxy);
     }
 
     /**
+     * 移除规则
      * Remove a rule from the composite rule.
      * @param rule the rule to remove
      */

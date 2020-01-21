@@ -31,6 +31,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
+ * json 文件生成规则定义
+ *
  * Rule definition reader based on <a href="https://github.com/FasterXML/jackson">Jackson</a>.
  *
  * This reader expects an array of rule definitions as input even for a single rule. For example:

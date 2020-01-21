@@ -33,6 +33,8 @@ import java.util.List;
 /**
  * Base class for rule factories.
  *
+ * 规则工厂抽象类
+ *
  * @param <C> parser context type
  *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
@@ -41,20 +43,37 @@ public abstract class AbstractRuleFactory<C> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRuleFactory.class);
 
+    /**
+     * 只允许这3种复合规则？？？ 不支持拓展？？？
+     */
     private static final List<String> ALLOWED_COMPOSITE_RULE_TYPES = Arrays.asList(
             UnitRuleGroup.class.getSimpleName(),
             ConditionalRuleGroup.class.getSimpleName(),
             ActivationRuleGroup.class.getSimpleName()
     );
 
+    /**
+     * 创建规则
+     * @param ruleDefinition
+     * @param context
+     * @return
+     */
     protected Rule createRule(RuleDefinition ruleDefinition, C context) {
+        //判断是否是复合规则
         if (ruleDefinition.isCompositeRule()) {
+            //创建复合规则
             return createCompositeRule(ruleDefinition, context);
         } else {
             return createSimpleRule(ruleDefinition, context);
         }
     }
 
+    /**
+     * 抽象方法 -- 创建简单规则
+     * @param ruleDefinition
+     * @param parserContext
+     * @return
+     */
     protected abstract Rule createSimpleRule(RuleDefinition ruleDefinition, C parserContext);
 
     protected Rule createCompositeRule(RuleDefinition ruleDefinition, C parserContext) {

@@ -27,6 +27,8 @@ import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
 
 /**
+ * 要么应用所有规则，要么不应用任何规则
+ *
  * A unit rule group is a composite rule that acts as a unit: Either all rules are applied or nothing is applied.
  *
  *  @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
@@ -66,6 +68,11 @@ public class UnitRuleGroup extends CompositeRule {
         super(name, description, priority);
     }
 
+    /**
+     * 只要有一个规则校验不通过，就返回 false
+     * @param facts
+     * @return
+     */
     @Override
     public boolean evaluate(Facts facts) {
         if (!rules.isEmpty()) {

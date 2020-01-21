@@ -78,6 +78,11 @@ public class ActivationRuleGroup extends CompositeRule {
         rules = new TreeSet<>(rules);
     }
 
+    /**
+     * 只要有一个规则符合条件，则跳过其他校验，并选出其中满足条件的规则
+     * @param facts
+     * @return
+     */
     @Override
     public boolean evaluate(Facts facts) {
         for (Rule rule : rules) {
@@ -89,6 +94,11 @@ public class ActivationRuleGroup extends CompositeRule {
         return false;
     }
 
+    /**
+     * 执行命中的的规则
+     * @param facts
+     * @throws Exception
+     */
     @Override
     public void execute(Facts facts) throws Exception {
         if (selectedRule != null) {

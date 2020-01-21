@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 规则定期读取基类
+ *
  * Base class for {@link RuleDefinitionReader}s.
  *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
@@ -39,6 +41,7 @@ public abstract class AbstractRuleDefinitionReader implements RuleDefinitionRead
 
     public List<RuleDefinition> read(Reader reader) throws Exception {
         List<RuleDefinition> ruleDefinitions = new ArrayList<>();
+        //根据 reader，读取不同文件生成规则列表
         Iterable<Map<String, Object>> rules = loadRules(reader);
         for (Map<String, Object> rule : rules) {
             ruleDefinitions.add(createRuleDefinition(rule));
@@ -47,6 +50,8 @@ public abstract class AbstractRuleDefinitionReader implements RuleDefinitionRead
     }
 
     /**
+     * 抽象方法
+     *
      * Load rules from the given reader as an iterable of Maps.
      *
      * @param reader to read rules from
@@ -56,6 +61,8 @@ public abstract class AbstractRuleDefinitionReader implements RuleDefinitionRead
     protected abstract Iterable<Map<String, Object>> loadRules(Reader reader) throws Exception;
 
     /**
+     * 根据解析的文件结果，创建规则定义
+     *
      * Create a rule definition.
      *
      * @param map of rule properties
@@ -96,6 +103,7 @@ public abstract class AbstractRuleDefinitionReader implements RuleDefinitionRead
             List<RuleDefinition> composingRuleDefinitions = new ArrayList<>();
             for (Object rule : composingRules){
                 Map<String, Object> composingRuleMap = (Map<String, Object>) rule;
+                //递归，查找创建复合规则
                 composingRuleDefinitions.add(createRuleDefinition(composingRuleMap));
             }
             ruleDefinition.setComposingRules(composingRuleDefinitions);
