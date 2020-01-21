@@ -34,12 +34,17 @@ import java.util.List;
 /**
  * Base class for {@link RulesEngine} implementations.
  *
+ * 规则引擎抽象类
+ *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
  */
 public abstract class AbstractRulesEngine implements RulesEngine {
 
+    //规则引擎参数
     RulesEngineParameters parameters;
+    //规则监听器
     List<RuleListener> ruleListeners;
+    //规则引擎监听器
     List<RulesEngineListener> rulesEngineListeners;
 
     AbstractRulesEngine() {

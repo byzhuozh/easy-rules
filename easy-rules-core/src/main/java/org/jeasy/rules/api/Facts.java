@@ -40,6 +40,8 @@ public class Facts implements Iterable<Map.Entry<String, Object>> {
      * Put a fact in the working memory.
      * This will replace any fact having the same name.
      *
+     * 在内存中放置因素
+     *
      * @param name fact name
      * @param fact object to put in the working memory
      * @return the previous value associated with <tt>name</tt>, or

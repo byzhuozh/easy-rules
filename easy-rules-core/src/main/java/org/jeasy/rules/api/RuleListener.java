@@ -26,11 +26,15 @@ package org.jeasy.rules.api;
 /**
  * A listener for rules execution events.
  *
+ * 规则执行时的事件监听器
+ *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
  */
 public interface RuleListener {
 
     /**
+     * 规则条件判断之前的触发器
+     *
      * Triggered before the evaluation of a rule.
      *
      * @param rule being evaluated
@@ -40,6 +44,8 @@ public interface RuleListener {
     boolean beforeEvaluate(Rule rule, Facts facts);
 
     /**
+     * 规则条件判断之后的触发器
+     *
      * Triggered after the evaluation of a rule.
      *
      * @param rule that has been evaluated
@@ -49,6 +55,8 @@ public interface RuleListener {
     void afterEvaluate(Rule rule, Facts facts, boolean evaluationResult);
 
     /**
+     * 规则执行之前的触发器
+     *
      * Triggered before the execution of a rule.
      *
      * @param rule the current rule
@@ -57,6 +65,8 @@ public interface RuleListener {
     void beforeExecute(Rule rule, Facts facts);
 
     /**
+     * 规则执行成功之后的触发器
+     *
      * Triggered after a rule has been executed successfully.
      *
      * @param rule the current rule
@@ -65,6 +75,8 @@ public interface RuleListener {
     void onSuccess(Rule rule, Facts facts);
 
     /**
+     * 规则执行失败之后的触发器
+     *
      * Triggered after a rule has failed.
      *
      * @param rule      the current rule

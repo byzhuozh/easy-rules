@@ -26,6 +26,8 @@ package org.jeasy.rules.api;
 import org.jeasy.rules.core.InferenceRulesEngine;
 
 /**
+ * 规则引擎的监听器
+ *
  * A listener for rules engine execution events.
  *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
@@ -33,6 +35,8 @@ import org.jeasy.rules.core.InferenceRulesEngine;
 public interface RulesEngineListener {
 
     /**
+     * 执行规则前触发
+     *
      * Triggered before evaluating the rule set.
      * <strong>When this listener is used with a {@link InferenceRulesEngine}, this method will be triggered before the evaluation of each candidate rule set in each iteration.</strong>
      *
@@ -42,6 +46,8 @@ public interface RulesEngineListener {
     void beforeEvaluate(Rules rules, Facts facts);
 
     /**
+     * 执行规则后触发
+     *
      * Triggered after executing the rule set
      * <strong>When this listener is used with a {@link InferenceRulesEngine}, this method will be triggered after the execution of each candidate rule set in each iteration.</strong>
      *

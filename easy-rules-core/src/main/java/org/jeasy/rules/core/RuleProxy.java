@@ -44,13 +44,19 @@ import static java.lang.String.format;
 /**
  * Main class to create rule proxies from annotated objects.
  *
+ * 规则代理
+ *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
  */
 public class RuleProxy implements InvocationHandler {
 
+    //代理的目标类
     private Object target;
+    //规则名称
     private String name;
+    //规则简介
     private String description;
+    //优先级
     private Integer priority;
     private Method[] methods;
     private Method conditionMethod;
@@ -72,6 +78,8 @@ public class RuleProxy implements InvocationHandler {
      *
      * @param rule the annotated rule object.
      * @return a proxy that implements the {@link Rule} interface.
+     *
+     * 生成规则代理类
      */
     public static Rule asRule(final Object rule) {
         Rule result;

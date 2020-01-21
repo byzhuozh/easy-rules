@@ -38,12 +38,16 @@ public interface RulesEngine {
     /**
      * Return the rules engine parameters.
      *
+     * 返回规则引擎的参数
+     *
      * @return The rules engine parameters
      */
     RulesEngineParameters getParameters();
 
     /**
      * Return the list of registered rule listeners.
+     *
+     * 返回已注册的规则监听器的列表
      *
      * @return the list of registered rule listeners
      */
@@ -53,17 +57,23 @@ public interface RulesEngine {
      * Return the list of registered rules engine listeners.
      *
      * @return the list of registered rules engine listeners
+     *
+     * 返回的规则引擎监听器的列表
      */
     List<RulesEngineListener> getRulesEngineListeners();
 
     /**
      * Fire all registered rules on given facts.
+     *
+     * 在给定的因素上开启所有已注册的规则
      */
     void fire(Rules rules, Facts facts);
 
     /**
      * Check rules without firing them.
      * @return a map with the result of evaluation of each rule
+     *
+     * 检查规则和因素是否符合
      */
     Map<Rule, Boolean> check(Rules rules, Facts facts);
 }

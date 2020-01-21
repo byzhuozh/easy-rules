@@ -26,6 +26,8 @@ package org.jeasy.rules.api;
 /**
  * This interface represents a rule's action.
  *
+ * 执行动作
+ *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
  */
 public interface Action {

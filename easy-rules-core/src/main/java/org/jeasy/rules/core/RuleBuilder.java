@@ -33,6 +33,8 @@ import java.util.List;
 /**
  * Builder to create {@link Rule} instances.
  *
+ * 规则构造器
+ *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
  */
 public class RuleBuilder {

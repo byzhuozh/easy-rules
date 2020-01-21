@@ -29,6 +29,8 @@ import org.jeasy.rules.api.Rule;
 /**
  * Basic rule implementation class that provides common methods.
  *
+ * 规则的实现基类
+ *
  * You can extend this class and override {@link BasicRule#evaluate(Facts)} and {@link BasicRule#execute(Facts)} to provide rule
  * conditions and actions logic.
  *

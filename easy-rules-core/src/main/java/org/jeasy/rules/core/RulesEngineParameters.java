@@ -26,6 +26,8 @@ package org.jeasy.rules.core;
 /**
  * Parameters of a rules engine.
  *
+ * 规则引擎参数
+ *
  * <ul>
  *     <li>When parameters are used with a {@link DefaultRulesEngine}, they are applied on <strong>all registered rules</strong>.</li>
  *     <li>When parameters are used with a {@link InferenceRulesEngine}, they are applied on <strong>candidate rules in each iteration</strong>.</li>
@@ -42,21 +44,29 @@ public class RulesEngineParameters {
     
     /**
      * Parameter to skip next applicable rules when a rule is applied.
+     *
+     * 如果第一个规则命中，则后续的规则不在执行
      */
     private boolean skipOnFirstAppliedRule;
 
     /**
      * Parameter to skip next applicable rules when a rule is non triggered
+     *
+     * 如果第一个规则没有被触发，则后续的规则也不触发
      */
     private boolean skipOnFirstNonTriggeredRule;
 
     /**
      * Parameter to skip next applicable rules when a rule has failed.
+     *
+     * 如果第一个规则执行失败，则后续的规则不处理
      */
     private boolean skipOnFirstFailedRule;
 
     /**
      * Parameter to skip next rules if priority exceeds a user defined threshold.
+     *
+     * 优先级的阈值，即如果超过用户定义优先级阈值，则跳过当前的规则
      */
     private int priorityThreshold;
 

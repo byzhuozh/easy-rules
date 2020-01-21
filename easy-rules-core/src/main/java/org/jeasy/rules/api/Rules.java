@@ -31,6 +31,8 @@ import java.util.*;
  * This class encapsulates a set of rules and represents a rules namespace.
  * Rules must have a unique name within a rules namespace.
  *
+ * 规则集
+ *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
  */
 public class Rules implements Iterable<Rule> {

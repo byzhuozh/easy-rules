@@ -30,6 +30,9 @@ import org.jeasy.rules.api.Facts;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 默认规则
+ */
 class DefaultRule extends BasicRule {
 
     private Condition condition = Condition.FALSE;
@@ -41,11 +44,21 @@ class DefaultRule extends BasicRule {
         this.actions = actions;
     }
 
+    /**
+     * 检验因子是否满足条件
+     * @param facts
+     * @return
+     */
     @Override
     public boolean evaluate(Facts facts) {
         return condition.evaluate(facts);
     }
 
+    /**
+     * 根据因子参数执行
+     * @param facts
+     * @throws Exception
+     */
     @Override
     public void execute(Facts facts) throws Exception {
         for (Action action : actions) {

@@ -40,6 +40,8 @@ import org.jeasy.rules.api.Facts;
 /**
  * This component validates that an annotated rule object is well defined.
  *
+ * 检验规则的合法性
+ *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
  */
 class RuleDefinitionValidator {

@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 默认的规则引擎实现
+ *
  * Default {@link RulesEngine} implementation.
  *
  * This implementation handles a set of rules with unique names.
@@ -61,8 +63,13 @@ public final class DefaultRulesEngine extends AbstractRulesEngine {
 
     @Override
     public void fire(Rules rules, Facts facts) {
+        //在执行规则前触发监听器
         triggerListenersBeforeRules(rules, facts);
+
+        //执行规则
         doFire(rules, facts);
+
+        //执行规则后触发监听器
         triggerListenersAfterRules(rules, facts);
     }
 
@@ -76,33 +83,48 @@ public final class DefaultRulesEngine extends AbstractRulesEngine {
         log(facts);
         LOGGER.debug("Rules evaluation started");
         for (Rule rule : rules) {
+            //规则名称
             final String name = rule.getName();
+            //规则优先级
             final int priority = rule.getPriority();
+
+            //如果规则的优先级超过参数中定义的优先级阈值，则当前的规则不执行，跳过
             if (priority > parameters.getPriorityThreshold()) {
                 LOGGER.debug("Rule priority threshold ({}) exceeded at rule '{}' with priority={}, next rules will be skipped",
                         parameters.getPriorityThreshold(), name, priority);
                 break;
             }
+
             if (!shouldBeEvaluated(rule, facts)) {
-                LOGGER.debug("Rule '{}' has been skipped before being evaluated",
-                    name);
+                LOGGER.debug("Rule '{}' has been skipped before being evaluated", name);
                 continue;
             }
+
+            //参数因子满足规则条件
             if (rule.evaluate(facts)) {
                 LOGGER.debug("Rule '{}' triggered", name);
                 triggerListenersAfterEvaluate(rule, facts, true);
                 try {
+                    //规则执行前的事件触发
                     triggerListenersBeforeExecute(rule, facts);
+
+                    //执行规则
                     rule.execute(facts);
                     LOGGER.debug("Rule '{}' performed successfully", name);
+
+                    //触发规则执行成功事件
                     triggerListenersOnSuccess(rule, facts);
+
                     if (parameters.isSkipOnFirstAppliedRule()) {
                         LOGGER.debug("Next rules will be skipped since parameter skipOnFirstAppliedRule is set");
                         break;
                     }
                 } catch (Exception exception) {
                     LOGGER.error("Rule '" + name + "' performed with error", exception);
+
+                    //触发规则执行成功事件
                     triggerListenersOnFailure(rule, exception, facts);
+
                     if (parameters.isSkipOnFirstFailedRule()) {
                         LOGGER.debug("Next rules will be skipped since parameter skipOnFirstFailedRule is set");
                         break;
@@ -119,10 +141,17 @@ public final class DefaultRulesEngine extends AbstractRulesEngine {
         }
     }
 
+    /**
+     * 打印参数日志
+     */
     private void logEngineParameters() {
         LOGGER.debug(parameters.toString());
     }
 
+    /**
+     * 打印规则列表日志
+     * @param rules
+     */
     private void log(Rules rules) {
         LOGGER.debug("Registered rules:");
         for (Rule rule : rules) {
@@ -131,6 +160,10 @@ public final class DefaultRulesEngine extends AbstractRulesEngine {
         }
     }
 
+    /**
+     * 打印参数因子日志
+     * @param facts
+     */
     private void log(Facts facts) {
         LOGGER.debug("Known facts:");
         for (Map.Entry<String, Object> fact : facts) {
