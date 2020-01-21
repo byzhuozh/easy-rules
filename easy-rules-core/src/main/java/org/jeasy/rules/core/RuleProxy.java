@@ -59,7 +59,9 @@ public class RuleProxy implements InvocationHandler {
     //优先级
     private Integer priority;
     private Method[] methods;
+    //被代理之类中的 @condition 注解的方法
     private Method conditionMethod;
+    //被代理之类中的 @action 注解的方法
     private Set<ActionMethodOrderBean> actionMethods;
     private Method compareToMethod;
     private Method toStringMethod;
